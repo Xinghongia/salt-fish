@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+    <display-name>salt-fish</display-name>
+
+    <!-- ==================== Filters ==================== -->
+    <filter>
+        <filter-name>login</filter-name>
+        <filter-class>com.luna.saltfish.filter.AutoLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>charset</filter-name>
+        <filter-class>com.luna.saltfish.filter.CharSetFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>charset</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>commonData</filter-name>
+        <filter-class>com.luna.saltfish.filter.CommonDataFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>commonData</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ==================== Servlets ==================== -->
+
+    <!-- 注册 -->
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/user/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <!-- 登录 -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- 退出 -->
+    <servlet>
+        <servlet-name>ExitLoginServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.ExitLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ExitLoginServlet</servlet-name>
+        <url-pattern>/ExitLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExitLoginServlet</servlet-name>
+        <url-pattern>/exit</url-pattern>
+    </servlet-mapping>
+
+    <!-- 上传头像 -->
+    <servlet>
+        <servlet-name>UpdateUserImgServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.UpdateUserImgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateUserImgServlet</servlet-name>
+        <url-pattern>/UpdateUserImgServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 更新个人信息 -->
+    <servlet>
+        <servlet-name>UpdateUserInfoServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.UpdateUserInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateUserInfoServlet</servlet-name>
+        <url-pattern>/UpdateUserInfoServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 审核物品 -->
+    <servlet>
+        <servlet-name>AuditingServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.AuditingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuditingServlet</servlet-name>
+        <url-pattern>/AuditingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuditingServlet</servlet-name>
+        <url-pattern>/api/auditing</url-pattern>
+    </servlet-mapping>
+
+    <!-- 物品检查合法性 -->
+    <servlet>
+        <servlet-name>GoodsCheckServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.GoodsCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoodsCheckServlet</servlet-name>
+        <url-pattern>/GoodsCheckServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 收藏检查 -->
+    <servlet>
+        <servlet-name>CheckCollectServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.CheckCollectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckCollectServlet</servlet-name>
+        <url-pattern>/CheckCollectServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 添加收藏 -->
+    <servlet>
+        <servlet-name>CollectServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.CollectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CollectServlet</servlet-name>
+        <url-pattern>/CollectServlet</url-pattern>
+        <url-pattern>/api/collect</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 购物车检查 -->
+    <servlet>
+        <servlet-name>CheckShoppingServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.CheckShoppingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckShoppingServlet</servlet-name>
+        <url-pattern>/CheckShoppingServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 添加购物车 -->
+    <servlet>
+        <servlet-name>ShoppingCartServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.ShoppingCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShoppingCartServlet</servlet-name>
+        <url-pattern>/ShoppingCartServlet</url-pattern>
+        <url-pattern>/api/shopping</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 删除购物车项 -->
+    <servlet>
+        <servlet-name>RemoveShopCartServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.RemoveShopCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveShopCartServlet</servlet-name>
+        <url-pattern>/RemoveShopCartServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 删除留言 -->
+    <servlet>
+        <servlet-name>RemoveMessServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.RemoveMessServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveMessServlet</servlet-name>
+        <url-pattern>/RemoveMessServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 取消收藏 -->
+    <servlet>
+        <servlet-name>RemoveCollectServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.RemoveCollectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveCollectServlet</servlet-name>
+        <url-pattern>/RemoveCollectServlet</url-pattern>
+        <url-pattern>/api/removeCollect</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==================== 页面控制器 ==================== -->
+
+    <!-- 首页 -->
+    <servlet>
+        <servlet-name>IndexController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.IndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexController</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <!-- 搜索 -->
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.SearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <!-- 商品详情 -->
+    <servlet>
+        <servlet-name>GoodsInfoController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.GoodsInfoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoodsInfoController</servlet-name>
+        <url-pattern>/goods/info</url-pattern>
+    </servlet-mapping>
+
+    <!-- 个人中心 -->
+    <servlet>
+        <servlet-name>PersonalController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.PersonalController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalController</servlet-name>
+        <url-pattern>/personal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PersonalController</servlet-name>
+        <url-pattern>/personal/index</url-pattern>
+    </servlet-mapping>
+
+    <!-- 个人信息 -->
+    <servlet>
+        <servlet-name>PersonalInfoController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.PersonalInfoController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalInfoController</servlet-name>
+        <url-pattern>/personal/info</url-pattern>
+    </servlet-mapping>
+
+    <!-- 发布商品 -->
+    <servlet>
+        <servlet-name>PushController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.PushController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PushController</servlet-name>
+        <url-pattern>/personal/push</url-pattern>
+        <url-pattern>/push</url-pattern>
+    </servlet-mapping>
+
+    <!-- 已发布 -->
+    <servlet>
+        <servlet-name>PushedController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.PushedController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PushedController</servlet-name>
+        <url-pattern>/personal/pushed</url-pattern>
+        <url-pattern>/pushed</url-pattern>
+    </servlet-mapping>
+
+    <!-- 购物车 -->
+    <servlet>
+        <servlet-name>ShopCartController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.ShopCartController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShopCartController</servlet-name>
+        <url-pattern>/personal/shopcart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShopCartController</servlet-name>
+        <url-pattern>/shopcart</url-pattern>
+    </servlet-mapping>
+
+    <!-- 收藏 -->
+    <servlet>
+        <servlet-name>LikeController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.LikeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LikeController</servlet-name>
+        <url-pattern>/personal/like</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikeController</servlet-name>
+        <url-pattern>/collect/check</url-pattern>
+    </servlet-mapping>
+
+    <!-- 消息 -->
+    <servlet>
+        <servlet-name>MessController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.MessController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessController</servlet-name>
+        <url-pattern>/personal/mess</url-pattern>
+    </servlet-mapping>
+
+    <!-- 购买历史 -->
+    <servlet>
+        <servlet-name>HistoryController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.HistoryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HistoryController</servlet-name>
+        <url-pattern>/personal/history</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryController</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理员审核 -->
+    <servlet>
+        <servlet-name>AuditingController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AuditingController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuditingController</servlet-name>
+        <url-pattern>/personal/auditing</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuditingController</servlet-name>
+        <url-pattern>/auditing</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==================== 管理员控制台 ==================== -->
+
+    <!-- 管理员控制台首页 -->
+    <servlet>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminDashboardController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理员商品管理 -->
+    <servlet>
+        <servlet-name>AdminGoodsController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminGoodsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminGoodsController</servlet-name>
+        <url-pattern>/admin/goods</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理员用户管理 -->
+    <servlet>
+        <servlet-name>AdminUsersController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminUsersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUsersController</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理员订单管理 -->
+    <servlet>
+        <servlet-name>AdminOrdersController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminOrdersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminOrdersController</servlet-name>
+        <url-pattern>/admin/orders</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理员操作API -->
+    <servlet>
+        <servlet-name>AdminActionServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.AdminActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminActionServlet</servlet-name>
+        <url-pattern>/api/admin/action</url-pattern>
+    </servlet-mapping>
+
+    <!-- 系统公告管理 -->
+    <servlet>
+        <servlet-name>AdminAnnouncementController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminAnnouncementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminAnnouncementController</servlet-name>
+        <url-pattern>/admin/announcements</url-pattern>
+    </servlet-mapping>
+
+    <!-- 用户反馈管理 -->
+    <servlet>
+        <servlet-name>AdminFeedbackController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminFeedbackController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminFeedbackController</servlet-name>
+        <url-pattern>/admin/feedback</url-pattern>
+    </servlet-mapping>
+
+    <!-- 系统设置 -->
+    <servlet>
+        <servlet-name>AdminSettingsController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminSettingsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminSettingsController</servlet-name>
+        <url-pattern>/admin/settings</url-pattern>
+    </servlet-mapping>
+
+    <!-- 操作日志 -->
+    <servlet>
+        <servlet-name>AdminLogsController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminLogsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminLogsController</servlet-name>
+        <url-pattern>/admin/logs</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==================== 配置 ==================== -->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404.jsp</location>
+    </error-page>
+
+    <!-- API: 购物车数量 -->
+    <servlet>
+        <servlet-name>CartNumServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.CartNumServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartNumServlet</servlet-name>
+        <url-pattern>/api/cartnum</url-pattern>
+    </servlet-mapping>
+
+    <!-- API: 消息数量 -->
+    <servlet>
+        <servlet-name>MessNumServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.api.MessNumServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessNumServlet</servlet-name>
+        <url-pattern>/api/messnum</url-pattern>
+    </servlet-mapping>
+
+    <!-- 用户反馈 -->
+    <servlet>
+        <servlet-name>FeedbackController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.FeedbackController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/feedback</url-pattern>
+    </servlet-mapping>
+
+    <!-- 下单 -->
+    <servlet>
+        <servlet-name>OrderCheckServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.OrderCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderCheckServlet</servlet-name>
+        <url-pattern>/OrderCheckServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 购物车批量结算 -->
+    <servlet>
+        <servlet-name>BuyAllShopcartServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.BuyAllShopcartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BuyAllShopcartServlet</servlet-name>
+        <url-pattern>/BuyAllShopcartServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 留言 -->
+    <servlet>
+        <servlet-name>MessCheckServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.MessCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessCheckServlet</servlet-name>
+        <url-pattern>/MessCheckServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.AdminCategoryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCategoryController</servlet-name>
+        <url-pattern>/admin/categories</url-pattern>
+    </servlet-mapping>
+</web-app>
