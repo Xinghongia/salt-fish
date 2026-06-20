@@ -111,7 +111,7 @@ def start():
     atexit.register(lambda: proc.terminate())
 
     # 等几秒让 Tomcat 起来，然后打开浏览器
-    time.sleep(3)
+    time.sleep(2)
     webbrowser.open(URL)
 
     # 阻塞等待进程结束

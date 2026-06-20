@@ -116,6 +116,16 @@ var Admin = {
             Admin.batchRequest('batchDeleteOrders');
         });
     },
+    batchCancelOrders: function() {
+        Admin.confirm('\u786e\u5b9a\u53d6\u6d88\u9009\u4e2d\u7684\u4ea4\u6613\uff1f\u5546\u54c1\u5c06\u6062\u590d\u5728\u552e\u3002', function() {
+            Admin.batchRequest('batchCancelOrders');
+        });
+    },
+    batchCompleteOrders: function() {
+        Admin.confirm('\u786e\u5b9a\u6807\u8bb0\u9009\u4e2d\u7684\u4ea4\u6613\u4e3a\u5df2\u5b8c\u6210\uff1f', function() {
+            Admin.batchRequest('batchCompleteOrders');
+        });
+    },
     batchDeleteAnnouncements: function() {
         Admin.confirm('\u786e\u5b9a\u5220\u9664\u9009\u4e2d\u7684\u516c\u544a\uff1f', function() {
             Admin.batchRequest('batchDeleteAnnouncements');

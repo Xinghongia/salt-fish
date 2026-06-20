@@ -2,10 +2,6 @@ package com.luna.saltfish.dao;
 
 import com.luna.saltfish.entity.AdminLog;
 import com.luna.saltfish.util.JdbcTemplate;
-import org.apache.commons.dbutils.BasicRowProcessor;
-import org.apache.commons.dbutils.BeanProcessor;
-import org.apache.commons.dbutils.GenerousBeanProcessor;
-import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -18,9 +14,7 @@ public class AdminLogHandle {
 
     public BeanListHandler<AdminLog> getBeanListHandler() {
         if (beanListHandler == null) {
-            BeanProcessor bean = new GenerousBeanProcessor();
-            RowProcessor processor = new BasicRowProcessor(bean);
-            return new BeanListHandler<>(AdminLog.class, processor);
+            return new BeanListHandler<>(AdminLog.class);
         }
         return beanListHandler;
     }

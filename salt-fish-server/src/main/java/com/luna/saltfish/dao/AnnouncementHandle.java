@@ -2,10 +2,6 @@ package com.luna.saltfish.dao;
 
 import com.luna.saltfish.entity.Announcement;
 import com.luna.saltfish.util.JdbcTemplate;
-import org.apache.commons.dbutils.BasicRowProcessor;
-import org.apache.commons.dbutils.BeanProcessor;
-import org.apache.commons.dbutils.GenerousBeanProcessor;
-import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -20,18 +16,14 @@ public class AnnouncementHandle {
 
     public BeanHandler<Announcement> getBeanHandler() {
         if (beanHandler == null) {
-            BeanProcessor bean = new GenerousBeanProcessor();
-            RowProcessor processor = new BasicRowProcessor(bean);
-            return new BeanHandler<>(Announcement.class, processor);
+            return new BeanHandler<>(Announcement.class);
         }
         return beanHandler;
     }
 
     public BeanListHandler<Announcement> getBeanListHandler() {
         if (beanListHandler == null) {
-            BeanProcessor bean = new GenerousBeanProcessor();
-            RowProcessor processor = new BasicRowProcessor(bean);
-            return new BeanListHandler<>(Announcement.class, processor);
+            return new BeanListHandler<>(Announcement.class);
         }
         return beanListHandler;
     }

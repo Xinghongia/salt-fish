@@ -24,14 +24,12 @@ public class MessHandle {
     private BeanListHandler<Mess> beanListHandler;
 
     public BeanHandler<Mess> getBeanHandler() {
-
         if (beanHandler == null) {
             BeanProcessor bean = new GenerousBeanProcessor();
             RowProcessor processor = new BasicRowProcessor(bean);
             return new BeanHandler<Mess>(Mess.class, processor);
-        } else {
-            return beanHandler;
         }
+        return beanHandler;
     }
 
     public void setBeanHandler(BeanHandler<Mess> beanHandler) {
@@ -43,9 +41,8 @@ public class MessHandle {
             BeanProcessor bean = new GenerousBeanProcessor();
             RowProcessor processor = new BasicRowProcessor(bean);
             return new BeanListHandler<Mess>(Mess.class, processor);
-        } else {
-            return beanListHandler;
         }
+        return beanListHandler;
     }
 
     public void setBeanListHandler(BeanListHandler<Mess> beanListHandler) {

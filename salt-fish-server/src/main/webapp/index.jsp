@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:if test="${empty goodsList}">
+<c:if test="${empty goodsList and empty ceta}">
     <c:redirect url="/index" />
 </c:if>
 
@@ -46,16 +46,21 @@
 
     <!-- Category Navigation -->
         <div class="category-nav">
-            <a href="${basePath}index?ceta=0" class="category-item ${ceta == 0 ? 'active' : ''}"><i data-lucide="tag" class="icon-sm"></i> 全部</a>
+            <a href="${basePath}index?ceta=0&sort=${sort}" class="category-item ${ceta == 0 ? 'active' : ''}"><i data-lucide="tag" class="icon-sm"></i> 全部</a>
             <c:forEach var="cat" items="${categoryList}">
-                <a href="${basePath}index?ceta=${cat.id}" class="category-item ${ceta == cat.id ? 'active' : ''}"><i data-lucide="${cat.icon}" class="icon-sm"></i> ${cat.name}</a>
+                <a href="${basePath}index?ceta=${cat.id}&sort=${sort}" class="category-item ${ceta == cat.id ? 'active' : ''}"><i data-lucide="${cat.icon}" class="icon-sm"></i> ${cat.name}</a>
             </c:forEach>
         </div>
 
-        <!-- Results Info -->
+        <!-- Results Info + Sort -->
         <div class="flex justify-between items-center mb-3" style="padding:var(--space-md) 0">
             <div style="color:var(--text-secondary);font-size:0.88rem">
                 共找到 <strong style="color:var(--primary)">${total}</strong> 件商品
+            </div>
+            <div style="display:flex;gap:6px">
+                <a href="${basePath}index?ceta=${ceta}&sort=time_desc" class="btn btn-sm ${sort == 'time_desc' ? 'btn-primary' : 'btn-ghost'}">最新</a>
+                <a href="${basePath}index?ceta=${ceta}&sort=price_asc" class="btn btn-sm ${sort == 'price_asc' ? 'btn-primary' : 'btn-ghost'}">价格↑</a>
+                <a href="${basePath}index?ceta=${ceta}&sort=price_desc" class="btn btn-sm ${sort == 'price_desc' ? 'btn-primary' : 'btn-ghost'}">价格↓</a>
             </div>
         </div>
 
@@ -100,15 +105,15 @@
                 </div>
 
                 <!-- Pagination -->
-                <c:if test="${maxPage > 1}">
+                <c:if test="${total > 0}">
                     <div class="pagination">
-                        <a href="${basePath}index?ceta=${ceta}&pn=${pn > 1 ? pn-1 : 1}"
+                        <a href="${basePath}index?ceta=${ceta}&sort=${sort}&pn=${pn > 1 ? pn-1 : 1}"
                            class="page-btn ${pn <= 1 ? 'disabled' : ''}">‹</a>
                         <c:forEach begin="1" end="${maxPage}" var="i">
-                            <a href="${basePath}index?ceta=${ceta}&pn=${i}"
+                            <a href="${basePath}index?ceta=${ceta}&sort=${sort}&pn=${i}"
                                class="page-btn ${i == pn ? 'active' : ''}">${i}</a>
                         </c:forEach>
-                        <a href="${basePath}index?ceta=${ceta}&pn=${pn < maxPage ? pn+1 : maxPage}"
+                        <a href="${basePath}index?ceta=${ceta}&sort=${sort}&pn=${pn < maxPage ? pn+1 : maxPage}"
                            class="page-btn ${pn >= maxPage ? 'disabled' : ''}">›</a>
                     </div>
                 </c:if>
@@ -118,7 +123,7 @@
                     <div class="empty-icon"><i data-lucide="search" style="width:56px;height:56px;color:var(--text-light)"></i></div>
                     <h3>暂无商品</h3>
                     <p>该分类下暂时没有商品，换个分类看看吧</p>
-                    <a href="${basePath}index?ceta=0" class="btn btn-primary">浏览全部商品</a>
+                    <a href="${basePath}index?ceta=0&sort=${sort}" class="btn btn-primary">浏览全部商品</a>
                 </div>
             </c:otherwise>
         </c:choose>

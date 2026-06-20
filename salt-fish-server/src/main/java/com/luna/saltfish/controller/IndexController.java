@@ -52,6 +52,10 @@ public class IndexController extends HttpServlet {
             // 默认全部
         }
 
+        // 排序参数
+        String sort = request.getParameter("sort");
+        if (sort == null || sort.isEmpty()) sort = "time_desc";
+
         // 分类名称映射
         String[] typeNames = {"", "书籍", "生活", "衣物", "电子", "运动", "其他"};
 
@@ -65,9 +69,9 @@ public class IndexController extends HttpServlet {
             List<Goods> list;
 
             if (ceta == 0) {
-                list = goodsHandle.findAll(count, limitMin, perPage);
+                list = goodsHandle.findAll(count, limitMin, perPage, sort);
             } else {
-                list = goodsHandle.findByCeta(ceta, count, limitMin, perPage);
+                list = goodsHandle.findByCeta(ceta, count, limitMin, perPage, sort);
             }
 
             // 解决 N+1 查询：批量获取所有相关用户
@@ -91,6 +95,7 @@ public class IndexController extends HttpServlet {
             request.setAttribute("pn", pn);
             request.setAttribute("maxPage", maxPage);
             request.setAttribute("ceta", ceta);
+            request.setAttribute("sort", sort);
             request.setAttribute("typeNames", typeNames);
             request.setAttribute("total", total);
 

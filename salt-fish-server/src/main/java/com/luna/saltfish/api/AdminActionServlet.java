@@ -379,6 +379,41 @@ public class AdminActionServlet extends HttpServlet {
                     response.getWriter().print("success:" + count);
                     break;
                 }
+                case "batchCancelOrders": {
+                    String ids = request.getParameter("ids");
+                    if (ids == null || ids.isEmpty()) { response.getWriter().print(ResultConstant.ERROR); break; }
+                    OrderHandle bco = new OrderHandle();
+                    GoodsHandle bcg = new GoodsHandle();
+                    int count = 0;
+                    for (String id : ids.split(",")) {
+                        try {
+                            Order o = bco.findById(Integer.parseInt(id.trim()));
+                            if (o != null && bcg.updateStatusIfMatch(o.getGoodsId(), 2, 4)) {
+                                bco.doDeleteByGoodsId(o.getGoodsId());
+                                count++;
+                            }
+                        } catch (Exception ignored) {}
+                    }
+                    logAction(request, "批量取消交易", "共" + count + "笔", "管理员批量取消了" + count + "笔交易");
+                    response.getWriter().print("success:" + count);
+                    break;
+                }
+                case "batchCompleteOrders": {
+                    String ids = request.getParameter("ids");
+                    if (ids == null || ids.isEmpty()) { response.getWriter().print(ResultConstant.ERROR); break; }
+                    OrderHandle bmo = new OrderHandle();
+                    GoodsHandle bmg = new GoodsHandle();
+                    int count = 0;
+                    for (String id : ids.split(",")) {
+                        try {
+                            Order o = bmo.findById(Integer.parseInt(id.trim()));
+                            if (o != null && bmg.updateStatusIfMatch(o.getGoodsId(), 5, 4)) count++;
+                        } catch (Exception ignored) {}
+                    }
+                    logAction(request, "批量确认完成", "共" + count + "笔", "管理员批量确认了" + count + "笔交易完成");
+                    response.getWriter().print("success:" + count);
+                    break;
+                }
                 case "batchDeleteAnnouncements": {
                     String ids = request.getParameter("ids");
                     if (ids == null || ids.isEmpty()) { response.getWriter().print(ResultConstant.ERROR); break; }

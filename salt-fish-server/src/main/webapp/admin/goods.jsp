@@ -81,7 +81,7 @@
                                 <td><input type="checkbox" class="batch-select" value="${goods.id}"></td>
                                 <td>
                                     <div class="cell-goods">
-                                        <img src="${goods.image}" alt="${goods.name}" onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/static/user_img/0.jpg'">
+                                        <img src="${pageContext.request.contextPath}/${goods.image}" alt="${goods.name}" onerror="this.onerror=null;this.src='${pageContext.request.contextPath}/static/user_img/0.jpg'">
                                         <span class="goods-name"><c:out value="${goods.name}" /></span>
                                     </div>
                                 </td>
@@ -109,7 +109,7 @@
                                 <td>
                                     <div class="actions">
                                         <button class="btn btn-ghost btn-sm btn-icon" title="查看详情"
-                                            onclick="Admin.showGoodsDetail(${goods.id}, '${goods.name}', ${goods.price}, '${empty seller ? '已删除' : seller.name}', '${goods.status}', '<fmt:formatDate value="${goods.createDate}" pattern="yyyy-MM-dd HH:mm"/>', '${goods.content}', '${goods.image}')">
+                                            onclick="Admin.showGoodsDetail(${goods.id}, '${goods.name}', ${goods.price}, '${empty seller ? '已删除' : seller.name}', '${goods.status}', '<fmt:formatDate value="${goods.createDate}" pattern="yyyy-MM-dd HH:mm"/>', '${goods.content}', '${pageContext.request.contextPath}/${goods.image}')">
                                             <i data-lucide="eye" class="icon-sm"></i>
                                         </button>
                                         <c:if test="${goods.status == 1}">
@@ -176,7 +176,7 @@
         </div>
     </div>
 
-    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=5" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=6" charset="UTF-8"></script>
     <script>Admin.initBatch("goodsTable","goodsBatchBar")</script>
 </body>
 </html>

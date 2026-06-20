@@ -2,10 +2,6 @@ package com.luna.saltfish.dao;
 
 import com.luna.saltfish.entity.SystemSetting;
 import com.luna.saltfish.util.JdbcTemplate;
-import org.apache.commons.dbutils.BasicRowProcessor;
-import org.apache.commons.dbutils.BeanProcessor;
-import org.apache.commons.dbutils.GenerousBeanProcessor;
-import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -17,9 +13,7 @@ public class SystemSettingHandle {
 
     public BeanListHandler<SystemSetting> getBeanListHandler() {
         if (beanListHandler == null) {
-            BeanProcessor bean = new GenerousBeanProcessor();
-            RowProcessor processor = new BasicRowProcessor(bean);
-            return new BeanListHandler<>(SystemSetting.class, processor);
+            return new BeanListHandler<>(SystemSetting.class);
         }
         return beanListHandler;
     }

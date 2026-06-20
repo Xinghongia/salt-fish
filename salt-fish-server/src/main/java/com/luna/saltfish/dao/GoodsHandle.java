@@ -65,7 +65,12 @@ public class GoodsHandle {
     }
 
     public List<Goods> findAll(PageResult num, int limitMin, int perPage) throws Exception {
-        String sql = "SELECT g.id, g.num, g.content, g.type_id, g.image, g.producter_id, g.price, g.create_date, g.name, g.status FROM goods g LEFT JOIN category c ON g.type_id = c.id WHERE g.status=? AND (c.is_active=1 OR c.id IS NULL) ORDER BY g.create_date DESC LIMIT ?,?";
+        return findAll(num, limitMin, perPage, "time_desc");
+    }
+
+    public List<Goods> findAll(PageResult num, int limitMin, int perPage, String sort) throws Exception {
+        String orderBy = parseSort(sort, "g");
+        String sql = "SELECT g.id, g.num, g.content, g.type_id, g.image, g.producter_id, g.price, g.create_date, g.name, g.status FROM goods g LEFT JOIN category c ON g.type_id = c.id WHERE g.status=? AND (c.is_active=1 OR c.id IS NULL) ORDER BY " + orderBy + " LIMIT ?,?";
         List<Goods> queryGoodsList = JdbcTemplate.query(sql, getBeanListHandler(), GoodsStatusConstant.REVIEW_ED, limitMin, perPage);
         String count = "SELECT COUNT(*) FROM goods g LEFT JOIN category c ON g.type_id = c.id WHERE g.status=? AND (c.is_active=1 OR c.id IS NULL)";
         num.value = Integer.parseInt(JdbcTemplate.query(count, new ScalarHandler<>(), GoodsStatusConstant.REVIEW_ED).toString());
@@ -103,11 +108,27 @@ public class GoodsHandle {
     }
 
     public List<Goods> findByCeta(int cetaId, PageResult num, int limitMin, int perPage) throws Exception {
-        String sql = "SELECT id, num, content, type_id, image, producter_id, price, name, create_date, status FROM goods WHERE status=? AND type_id=? ORDER BY create_date DESC LIMIT ?,?";
+        return findByCeta(cetaId, num, limitMin, perPage, "time_desc");
+    }
+
+    public List<Goods> findByCeta(int cetaId, PageResult num, int limitMin, int perPage, String sort) throws Exception {
+        String orderBy = parseSort(sort, "");
+        String sql = "SELECT id, num, content, type_id, image, producter_id, price, name, create_date, status FROM goods WHERE status=? AND type_id=? ORDER BY " + orderBy + " LIMIT ?,?";
         List<Goods> goodsList = JdbcTemplate.query(sql, getBeanListHandler(), GoodsStatusConstant.REVIEW_ED, cetaId, limitMin, perPage);
         String count = "SELECT COUNT(*) FROM goods WHERE status=? AND type_id=?";
         num.value = Integer.parseInt(JdbcTemplate.query(count, new ScalarHandler<>(), GoodsStatusConstant.REVIEW_ED, cetaId).toString());
         return goodsList;
+    }
+
+    private String parseSort(String sort, String alias) {
+        String p = (alias != null && !alias.isEmpty()) ? alias + "." : "";
+        if (sort == null) return p + "create_date DESC";
+        switch (sort) {
+            case "price_asc":  return p + "price ASC";
+            case "price_desc": return p + "price DESC";
+            case "time_asc":   return p + "create_date ASC";
+            default:           return p + "create_date DESC";
+        }
     }
 
     public List<Goods> findByKey(String key) throws Exception {

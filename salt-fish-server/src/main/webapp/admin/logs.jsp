@@ -111,7 +111,7 @@
         </main>
     </div>
 
-    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=5" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=6" charset="UTF-8"></script>
     <script>Admin.initBatch("logsTable","logsBatchBar")</script>
 </body>
 </html>

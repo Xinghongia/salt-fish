@@ -145,7 +145,7 @@
         </div>
     </div>
 
-    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=5" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=6" charset="UTF-8"></script>
     <script>Admin.initBatch("catTable","catBatchBar")</script>
 </body>
 </html>

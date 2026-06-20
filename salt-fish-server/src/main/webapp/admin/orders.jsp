@@ -38,6 +38,8 @@
             <div class="batch-bar" id="ordersBatchBar">
                 <span class="batch-info">已选 <span class="batch-count">0</span> 项</span>
                 <div class="batch-actions">
+                    <button class="btn-batch" onclick="Admin.batchCancelOrders()"><i data-lucide="x-circle" class="icon-sm"></i> 批量取消交易</button>
+                    <button class="btn-batch" onclick="Admin.batchCompleteOrders()"><i data-lucide="check-circle" class="icon-sm"></i> 批量确认完成</button>
                     <button class="btn-batch-danger" onclick="Admin.batchDeleteOrders()"><i data-lucide="trash-2" class="icon-sm"></i> 批量删除</button>
                 </div>
             </div>
@@ -151,7 +153,7 @@
         </div>
     </div>
 
-    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=5" charset="UTF-8"></script>
+    <script src="${pageContext.request.contextPath}/src/js/admin.js?v=6" charset="UTF-8"></script>
     <script>Admin.initBatch("ordersTable","ordersBatchBar")</script>
 </body>
 </html>

@@ -62,6 +62,13 @@ public class OrderHandle {
         return JdbcTemplate.update(sql, orderId) > 0;
     }
 
+    public Order findById(int orderId) throws Exception {
+        String sql = "SELECT id, goods_id, user_id, date, message FROM `order` WHERE id=?";
+        org.apache.commons.dbutils.BeanProcessor bean = new org.apache.commons.dbutils.GenerousBeanProcessor();
+        org.apache.commons.dbutils.RowProcessor processor = new org.apache.commons.dbutils.BasicRowProcessor(bean);
+        return JdbcTemplate.query(sql, new BeanHandler<>(Order.class, processor), orderId);
+    }
+
     private BeanListHandler<Order> orderListHandler;
     private BeanListHandler<Order> getOrderListHandler() {
         if (orderListHandler == null) {
@@ -83,7 +90,7 @@ public class OrderHandle {
     }
 
     public int countByGoodsStatus(int goodsStatus) throws Exception {
-        String sql = "SELECT COUNT(*) FROM `order` o JOIN goods g ON o.goods_id=g.id WHERE g.status=?";
+        String sql = "SELECT COUNT(*) FROM goods g WHERE g.status=?";
         return Integer.parseInt(JdbcTemplate.query(sql, new ScalarHandler<>(), goodsStatus).toString());
     }
 

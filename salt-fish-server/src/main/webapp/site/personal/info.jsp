@@ -17,7 +17,20 @@
 
     <div class="profile-card" style="background:var(--bg-card);border-radius:var(--border-radius-lg);box-shadow:var(--shadow-md);overflow:hidden;border:1px solid var(--border-color)">
         <div style="background:linear-gradient(135deg,var(--primary) 0%,#8b5cf6 100%);padding:var(--space-2xl) var(--space-xl);display:flex;align-items:center;gap:var(--space-xl);color:var(--text-white)">
+            <c:if test="${isMe}">
+            <div style="position:relative;cursor:pointer" onclick="document.getElementById('avatarInput').click()">
+                <img id="avatarImg" src="${pageContext.request.contextPath}/${viewUser.img}" class="avatar avatar-xl" style="border:3px solid rgba(255,255,255,0.3)" alt="">
+                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='0'">
+                    <i data-lucide="camera" style="width:24px;height:24px;color:#fff"></i>
+                </div>
+            </div>
+            <form id="avatarForm" style="display:none">
+                <input type="file" id="avatarInput" name="file" accept="image/*" onchange="uploadAvatar(this)">
+            </form>
+            </c:if>
+            <c:if test="${not isMe}">
             <img src="${pageContext.request.contextPath}/${viewUser.img}" class="avatar avatar-xl" style="border:3px solid rgba(255,255,255,0.3)" alt="">
+            </c:if>
             <div>
                 <div style="font-size:1.4rem;font-weight:700">
                     <c:choose>
@@ -71,6 +84,30 @@
     </div>
 
     </main></div>
+    <script>
+    function uploadAvatar(input) {
+        if (!input.files || !input.files[0]) return;
+        var file = input.files[0];
+        if (file.size > 10 * 1024 * 1024) { SaltFish.showToast('error', '图片不能超过10MB'); return; }
+
+        var fd = new FormData();
+        fd.append('file', file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '${pageContext.request.contextPath}/UpdateUserImgServlet', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var img = document.getElementById('avatarImg');
+                img.src = '${pageContext.request.contextPath}/static/user_img/${viewUser.id}.jpg?' + Date.now();
+                SaltFish.showToast('success', '头像更新成功');
+            } else {
+                SaltFish.showToast('error', '上传失败');
+            }
+        };
+        xhr.onerror = function() { SaltFish.showToast('error', '网络错误'); };
+        xhr.send(fd);
+    }
+    </script>
     <jsp:include page="/common/footer.jsp" />
 </body>
 </html>
