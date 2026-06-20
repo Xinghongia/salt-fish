@@ -58,3 +58,6 @@ hs_err_pid*
 
 ## runtime ##
 /*/log
+
+# 数据库配置（不要提交真实密码）
+# salt-fish-server/src/main/resources/c3p0.properties
