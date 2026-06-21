@@ -78,29 +78,31 @@
 
     <script>
         function handleComplete(goodsId) {
-            if (!confirm('\u786e\u8ba4\u4ea4\u6613\u5df2\u5b8c\u6210\uff1f')) return;
-            SaltFish.ajax('api/admin/action?action=completeOrder&goodsId=' + goodsId, {
-                callback: function(resp) {
-                    if (resp && resp.indexOf('success') >= 0) {
-                        SaltFish.showToast('success', '\u4ea4\u6613\u5df2\u5b8c\u6210\uff0c\u5546\u54c1\u5df2\u6807\u8bb0\u4e3a\u5df2\u552e\u51fa');
-                        setTimeout(function() { location.reload(); }, 800);
-                    } else {
-                        SaltFish.showToast('error', '\u64cd\u4f5c\u5931\u8d25');
+            SaltFish.confirmDialog('\u786e\u8ba4\u4ea4\u6613\u5df2\u5b8c\u6210\uff1f\u786e\u8ba4\u540e\u5546\u54c1\u5c06\u6807\u8bb0\u4e3a\u5df2\u552e\u51fa\u3002', function() {
+                SaltFish.ajax('api/admin/action?action=completeOrder&goodsId=' + goodsId, {
+                    callback: function(resp) {
+                        if (resp && resp.indexOf('success') >= 0) {
+                            SaltFish.showToast('success', '\u4ea4\u6613\u5df2\u5b8c\u6210\uff0c\u5546\u54c1\u5df2\u6807\u8bb0\u4e3a\u5df2\u552e\u51fa');
+                            setTimeout(function() { location.reload(); }, 800);
+                        } else {
+                            SaltFish.showToast('error', '\u64cd\u4f5c\u5931\u8d25');
+                        }
                     }
-                }
+                });
             });
         }
         function handleCancel(goodsId) {
-            if (!confirm('\u786e\u5b9a\u53d6\u6d88\u4ea4\u6613\uff1f\u5546\u54c1\u5c06\u6062\u590d\u4e3a\u5728\u552e\u72b6\u6001\u3002')) return;
-            SaltFish.ajax('api/admin/action?action=cancelOrder&goodsId=' + goodsId, {
-                callback: function(resp) {
-                    if (resp && resp.indexOf('success') >= 0) {
-                        SaltFish.showToast('success', '\u4ea4\u6613\u5df2\u53d6\u6d88');
-                        setTimeout(function() { location.reload(); }, 800);
-                    } else {
-                        SaltFish.showToast('error', '\u64cd\u4f5c\u5931\u8d25');
+            SaltFish.confirmDialog('\u786e\u5b9a\u53d6\u6d88\u4ea4\u6613\uff1f\u5546\u54c1\u5c06\u6062\u590d\u4e3a\u5728\u552e\u72b6\u6001\u3002', function() {
+                SaltFish.ajax('api/admin/action?action=cancelOrder&goodsId=' + goodsId, {
+                    callback: function(resp) {
+                        if (resp && resp.indexOf('success') >= 0) {
+                            SaltFish.showToast('success', '\u4ea4\u6613\u5df2\u53d6\u6d88');
+                            setTimeout(function() { location.reload(); }, 800);
+                        } else {
+                            SaltFish.showToast('error', '\u64cd\u4f5c\u5931\u8d25');
+                        }
                     }
-                }
+                });
             });
         }
     </script>

@@ -58,6 +58,8 @@ hs_err_pid*
 
 ## runtime ##
 /*/log
+dependency-reduced-pom.xml
+**/work/
 
-# 数据库配置（不要提交真实密码）
-# salt-fish-server/src/main/resources/c3p0.properties
+# 本地数据库配置（包含真实密码，不要提交）
+salt-fish-server/src/main/resources/local.properties

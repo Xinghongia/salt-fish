@@ -58,7 +58,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <c:if test="${maxPage > 1}">
+                <c:if test="${total > 0}">
                     <div class="pagination">
                         <a href="${pageContext.request.contextPath}/search?key=${fn:escapeXml(key)}&pn=${pn > 1 ? pn-1 : 1}"
                            class="page-btn ${pn <= 1 ? 'disabled' : ''}">‹</a>

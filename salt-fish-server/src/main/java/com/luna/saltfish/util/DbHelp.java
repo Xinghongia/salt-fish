@@ -3,10 +3,12 @@ package com.luna.saltfish.util;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * 数据库工具类
@@ -23,8 +25,21 @@ public class DbHelp {
 
     static {
         try {
-            // 创建c3p0数据源
-            dataSource = new ComboPooledDataSource();
+            ComboPooledDataSource ds = new ComboPooledDataSource();
+            // 优先从 local.properties 或环境变量加载数据库配置
+            Properties props = new Properties();
+            InputStream in = DbHelp.class.getClassLoader().getResourceAsStream("local.properties");
+            if (in != null) {
+                props.load(in);
+                in.close();
+            }
+            String url  = props.getProperty("c3p0.jdbcUrl", System.getenv("DB_URL"));
+            String user = props.getProperty("c3p0.user", System.getenv("DB_USER"));
+            String pwd  = props.getProperty("c3p0.password", System.getenv("DB_PASSWORD"));
+            if (url  != null) ds.setJdbcUrl(url);
+            if (user != null) ds.setUser(user);
+            if (pwd  != null) ds.setPassword(pwd);
+            dataSource = ds;
         } catch (Exception e) {
             e.printStackTrace();
         }

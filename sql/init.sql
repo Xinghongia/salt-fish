@@ -1,5 +1,5 @@
 -- ============================================================
---  校园咸鱼 - 数据库初始化脚本
+--  校园盐鱼 - 数据库初始化脚本
 --  数据库: salt-fish  |  字符集: utf8 / utf8mb4
 --  用法: mysql -u root -p salt-fish < init.sql
 -- ============================================================
@@ -42,7 +42,7 @@ CREATE TABLE `announcement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `announcement` VALUES
-(1, '欢迎使用校园咸鱼', '这是一个校园二手交易平台，祝你交易愉快！', 999, 1, '2026-06-18 13:06:29');
+(1, '欢迎使用校园盐鱼', '这是一个校园二手交易平台，祝你交易愉快！', 999, 1, '2026-06-18 13:06:29');
 
 -- -----------------------------------------------------------
 --  商品分类
@@ -144,7 +144,7 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `message` VALUES
-(1, 999, 1032, '你好，欢迎使用校园咸鱼！',                '2026-06-19 14:42:18', 1, NULL),
+(1, 999, 1032, '你好，欢迎使用校园盐鱼！',                '2026-06-19 14:42:18', 1, NULL),
 (2, 1032, 999, '你好，请问有考研资料吗？',                 '2026-06-19 15:00:40', 1, NULL),
 (3, 999, 1032, '【购买通知】用户 管理员 购买了你的商品「笔记本」，请及时确认交易。', '2026-06-19 15:57:53', 0, NULL);
 
@@ -211,7 +211,7 @@ CREATE TABLE `system_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统设置表';
 
 INSERT INTO `system_setting` VALUES
-(1, 'site_name',        '校园咸鱼',                              '站点名称'),
+(1, 'site_name',        '校园盐鱼',                              '站点名称'),
 (2, 'site_description', '校园二手交易平台，让闲置物品找到新主人', '站点描述'),
 (3, 'perpage_goods',    '12',                                    '商品每页显示数量'),
 (4, 'maintenance_mode', '0',                                     '维护模式：0关闭 1开启');

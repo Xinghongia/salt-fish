@@ -18,7 +18,7 @@
     <style>
         .goods-detail{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);margin:var(--space-2xl) 0}
         .goods-gallery{border-radius:var(--border-radius-lg);overflow:hidden;background:var(--bg-hover);height:420px;display:flex;align-items:center;justify-content:center}
-        .goods-gallery img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+        .goods-gallery img{width:100%;height:100%;object-fit:contain;display:block}
         .goods-info h1{font-size:1.75rem;margin-bottom:var(--space-md)}
         .goods-price-box{background:var(--primary-bg);padding:var(--space-lg);border-radius:var(--border-radius);margin-bottom:var(--space-lg)}
         .goods-price-box .price{font-size:2.5rem;font-weight:700;color:var(--danger)}.goods-price-box .price .symbol{font-size:1.5rem}

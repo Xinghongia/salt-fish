@@ -97,6 +97,16 @@
         <url-pattern>/UpdateUserInfoServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- 修改密码 -->
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>com.luna.saltfish.controller.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/ChangePasswordServlet</url-pattern>
+    </servlet-mapping>
+
     <!-- API: 审核物品 -->
     <servlet>
         <servlet-name>AuditingServlet</servlet-name>

@@ -43,7 +43,14 @@
         </div>
         <div style="padding:var(--space-2xl)">
             <c:if test="${not empty param.info}">
-                <div class="alert alert-danger"><i data-lucide="alert-circle" class="icon"></i> <c:out value="${param.info}" /></div>
+                <c:choose>
+                    <c:when test="${fn:contains(param.info, '成功')}">
+                        <div class="alert alert-success"><i data-lucide="check-circle" class="icon"></i> <c:out value="${param.info}" /></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="alert alert-danger"><i data-lucide="alert-circle" class="icon"></i> <c:out value="${param.info}" /></div>
+                    </c:otherwise>
+                </c:choose>
             </c:if>
 
             <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:var(--space-lg);padding-bottom:var(--space-sm);border-bottom:2px solid var(--border-color);display:flex;align-items:center;gap:8px"><i data-lucide="file-text" class="icon"></i> 个人资料</h3>
@@ -80,11 +87,54 @@
                     <a href="${pageContext.request.contextPath}/personal/mess?handle=write&toemail=${fn:escapeXml(viewUser.email)}&toname=${fn:escapeXml(viewUser.name)}" class="btn btn-primary"><i data-lucide="send" class="icon-sm"></i> 发送消息</a>
                 </c:if>
             </form>
+
+            <c:if test="${isMe}">
+            <h3 style="font-size:1.15rem;font-weight:600;margin-top:var(--space-2xl);margin-bottom:var(--space-lg);padding-bottom:var(--space-sm);border-bottom:2px solid var(--border-color);display:flex;align-items:center;gap:8px"><i data-lucide="lock" class="icon"></i> 修改密码</h3>
+            <form action="${pageContext.request.contextPath}/ChangePasswordServlet" method="post">
+                <div class="grid grid-2" style="margin-bottom:var(--space-lg)">
+                    <div class="form-group">
+                        <label class="form-label">原密码</label>
+                        <div style="position:relative">
+                            <input type="password" class="form-control" name="oldPwd" id="oldPwd" required style="padding-right:40px">
+                            <i data-lucide="eye-off" class="icon-sm toggle-pwd" onclick="togglePwd('oldPwd', this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-light)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-2" style="margin-bottom:var(--space-lg)">
+                    <div class="form-group">
+                        <label class="form-label">新密码</label>
+                        <div style="position:relative">
+                            <input type="password" class="form-control" name="newPwd" id="newPwd" required style="padding-right:40px">
+                            <i data-lucide="eye-off" class="icon-sm toggle-pwd" onclick="togglePwd('newPwd', this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-light)"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">确认新密码</label>
+                        <div style="position:relative">
+                            <input type="password" class="form-control" name="confirmPwd" id="confirmPwd" required style="padding-right:40px">
+                            <i data-lucide="eye-off" class="icon-sm toggle-pwd" onclick="togglePwd('confirmPwd', this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-light)"></i>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i data-lucide="key" class="icon-sm"></i> 修改密码</button>
+            </form>
+            </c:if>
         </div>
     </div>
 
     </main></div>
     <script>
+    function togglePwd(inputId, icon) {
+        var input = document.getElementById(inputId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.setAttribute('data-lucide', 'eye');
+        } else {
+            input.type = 'password';
+            icon.setAttribute('data-lucide', 'eye-off');
+        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
     function uploadAvatar(input) {
         if (!input.files || !input.files[0]) return;
         var file = input.files[0];

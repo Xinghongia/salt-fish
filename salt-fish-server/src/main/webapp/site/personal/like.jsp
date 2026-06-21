@@ -76,6 +76,7 @@
         </c:otherwise>
     </c:choose>
 
+    <c:if test="${total > 0}">
     <div class="pagination" style="margin-top:var(--space-xl)">
         <a href="${pageContext.request.contextPath}/collect/check?pn=${pn > 1 ? pn-1 : 1}&userId=${viewUser.id}&sort=${sort}" class="page-btn ${pn <= 1 ? 'disabled' : ''}">&#8249;</a>
         <c:forEach begin="1" end="${maxPage}" var="i">
@@ -83,6 +84,7 @@
         </c:forEach>
         <a href="${pageContext.request.contextPath}/collect/check?pn=${pn < maxPage ? pn+1 : maxPage}&userId=${viewUser.id}&sort=${sort}" class="page-btn ${pn >= maxPage ? 'disabled' : ''}">&#8250;</a>
     </div>
+    </c:if>
 
     </main></div>
     <script>
